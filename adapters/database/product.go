@@ -11,6 +11,10 @@ type ProductDatabase struct {
 	database *sql.DB
 }
 
+func NewProductDb(database *sql.DB) *ProductDatabase {
+	return &ProductDatabase{database: database}
+}
+
 func (p *ProductDatabase) Get(id string) (application.IProduct, error) {
 	var product application.Product
 	stmt, err := p.database.Prepare("select id, name, price, status from products where id=?")
